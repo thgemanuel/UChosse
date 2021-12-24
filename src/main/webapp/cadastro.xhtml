@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Pagina de cadastro</title>
+    </h:head>
+    <h:body>
+        <h1>Cadastro</h1>
+
+        <h:form>
+            <h:panelGrid columns="4" cellpadding="4">
+                <h:outputLabel value="Nome: " />
+                <p:inputText value="#{clienteBean.cliente.nome}" pt:autofocus="autofocus" />
+                <h:outputLabel value="Endereco: " />
+                <p:inputText value="#{clienteBean.cliente.endereco}" />
+                <h:outputLabel value="Telefone: " />
+                <p:inputText value="#{clienteBean.cliente.telefone}" />
+                <h:outputLabel value="Email: " />
+                <p:inputText value="#{clienteBean.cliente.email}" />  
+                <h:outputLabel value="CPF: " />
+                <p:inputText value="#{clienteBean.cliente.cpf}" />             
+                <h:outputLabel value="Senha: " />
+                <p:inputText value="#{clienteBean.cliente.senha}" />                
+                <p:commandButton value="Criar"
+                                 icon="fa fa-fw fa-plus"
+                                 action="#{clienteBean.createCliente()}" />
+            </h:panelGrid>
+        </h:form>
+
+        <!-- Listagem de dados + edição e exclusão -->
+        <h:form id="form">
+            <p:dataTable value="#{clienteBean.findAllCliente()}"
+                         var="cliente"
+                         rowKey="#{cliente.id}">
+
+                <p:column headerText="id" style="text-align: center; width: 5em;">
+                    <h:outputText value="#{cliente.id}" />
+                </p:column>
+
+                <p:column headerText="Descrição">
+                    <h:outputText value="Nome do cliente: #{cliente.nome}"/>
+                    <br/>
+                    <h:outputText value="Endereco do cliente: #{cliente.endereco}" />
+                    <br/>
+                    <h:outputText value="Telefone do cliente: #{cliente.telefone}" /> 
+                    <br/>
+                    <h:outputText value="Email do cliente: #{cliente.email}"/>
+                    <br/>
+                    <h:outputText value="CPF: #{cliente.cpf}" />
+                    <br/>
+                    <h:outputText value="Senha: #{cliente.senha}" />
+                    <br/>
+                    <h:outputText value="Papel: #{cliente.papel}" />                                         
+                </p:column>
+
+                <p:column headerText="Edição" style="width: 7em; text-align: center;">
+                    <!-- Edição -->
+                    <p:commandButton value="Editar"
+                                     icon="fa fa-fw fa-plus" 
+                                     update=":form:clienteEdit"
+                                     oncomplete="PF('editDialog').show()">
+                        <f:setPropertyActionListener value="#{cliente}" 
+                                                     target="#{clienteBean.clienteSelecionada}"/>
+                    </p:commandButton>
+
+                    <!-- Exclusão -->
+                    <p:commandButton value="Excluir"
+                                     action="#{clienteBean.deleteCliente()}" 
+                                     icon="fa fa-trash">
+                        <f:setPropertyActionListener value="#{cliente}" 
+                                                     target="#{clienteBean.clienteSelecionada}"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+            <!-- Diálogo para edição de tarefa vinculado ao formulário -->
+            <p:dialog header="Edição de cliente"
+                      widgetVar="editDialog"
+                      modal="true"
+                      showEffect="fade"
+                      hideEffect="fade"
+                      resizable="false">
+                <p:outputPanel id="clienteEdit" 
+                               style="text-align: center;">
+                    <p:panelGrid columns="2" 
+                                 rendered="#{not empty clienteBean.clienteSelecionada}">
+
+                        <p:column headerText="Nome do cliente">
+                            <h:outputLabel value="Nome do cliente: " />
+                            <h:inputText value="#{clienteBean.clienteSelecionada.nome}" />
+                        </p:column>
+                        <p:column headerText="Endereco do cliente">
+                            <h:outputLabel value="Endereco do cliente: " />
+                            <h:inputText value="#{clienteBean.clienteSelecionada.endereco}" />
+                        </p:column>
+                        <p:column headerText="Telefone do cliente">
+                            <h:outputLabel value="Telefone do cliente: " />
+                            <h:inputText value="#{clienteBean.clienteSelecionada.telefone}" />
+                        </p:column>                                                                      
+                        <p:column headerText="Email do cliente">
+                            <h:outputLabel value="Email do cliente: " />
+                            <h:inputText value="#{clienteBean.clienteSelecionada.email}" />
+                        </p:column>
+                        <p:column headerText="CPF">
+                            <h:outputLabel value="CPF: " />
+                            <h:inputText value="#{clienteBean.clienteSelecionada.cpf}" />
+                        </p:column>
+                        <p:column headerText="Senha">
+                            <h:outputLabel value="Senha: " />
+                            <h:inputText value="#{clienteBean.clienteSelecionada.senha}" />
+                        </p:column>                          
+                        <p:column headerText="Papel">
+                            <h:outputLabel value="Papel: " />
+                            <h:inputText value="#{clienteBean.clienteSelecionada.papel}" />
+                        </p:column>                                               
+
+                        <p:commandButton value="Atualizar"
+                                         icon="fa fa-fw fa-pencil"
+                                         action="#{clienteBean.updateCliente()}" />
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+
+
+    </h:body>
+</html>

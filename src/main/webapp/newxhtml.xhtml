@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Uchoose</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="css/prettyPhoto.css" rel="stylesheet"/>
+        <link href="css/price-range.css" rel="stylesheet"/>
+        <link href="css/animate.css" rel="stylesheet"/>
+        <link href="css/main.css" rel="stylesheet"/>
+        <link href="css/responsive.css" rel="stylesheet"/>
+
+        <link rel="shortcut icon" href="images/ico/favicon.ico"/>
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png"/>
+        <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"/>
+
+    </h:head>
+    <h:body>
+
+        <div class="col-sm-9 padding-right">
+            <div class="features_items"><!--features_items-->
+                <h2 class="title text-center">Features Items</h2>
+
+                <ul>
+                    <ui:repeat value="#{restauranteBean.findAllRestaurante()}" var="restaurante">
+                        <div class="col-sm-4">
+
+                            <li>
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="images/home/#{restaurante.codigoRestaurante}.png" alt="" />
+                                            <p:outputLabel value="#{restaurante.nomeRestaurante}"/>
+                                            <p>
+                                                <p:outputLabel value="#{restaurante.descricao}"/>
+                                            </p>
+                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <!--<h:link value="#{restaurante.nomeRestaurante}" outcome="restaurante">
+                                                <f:param name="id" value="#{book.id}" />
+                                            </h:link>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </div>
+                    </ui:repeat>
+                </ul>
+
+            </div><!--features_items-->
+        </div>
+
+
+
+    </h:body>
+
+</html>

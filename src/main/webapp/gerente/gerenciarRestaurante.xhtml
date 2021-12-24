@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <title>Uchoose</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="css/prettyPhoto.css" rel="stylesheet"/>
+        <link href="css/price-range.css" rel="stylesheet"/>
+        <link href="css/animate.css" rel="stylesheet"/>
+        <link href="css/main.css" rel="stylesheet"/>
+        <link href="css/responsive.css" rel="stylesheet"/>
+
+        <link rel="shortcut icon" href="images/ico/favicon.ico"/>
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png"/>
+        <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"/>
+    </h:head><!--/head-->
+
+    <h:body>
+        <header id="header"><!--header-->
+
+
+            <div class="header-middle"><!--header-middle-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="logo pull-left">
+                                <a href="index.xhtml"><img src="images/home/logo.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="shop-menu pull-right">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="cadastroRestaurante.xhtml" class="active"><i class="fa fa-user"></i> Gerenciar Restaurante</a></li>
+                                    <li><a href="gerenciarRestaurante.xhtml" class="active"><i class="fa fa-user"></i> Gerenciar Pratos</a></li>
+                                    <li><a href="CRUD_Restaurante.xhtml" class="active"><i class="fa fa-user"></i> Adicionar Restaurante</a></li>
+                                    <li><a href="../login.xhtml" class="active"><i class="fa fa-lock"></i> Login</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/header-middle-->
+        </header><!--/header-->
+
+
+
+
+
+        <div class="container">
+            <div class="row">
+                <div>
+                    <div >
+                        <h2>Gerenciar Restaurante</h2>
+
+
+                        <h:form id="form">
+                            <p:dataTable
+                                id="restaurante"
+                                value="#{restauranteBean.findAllRestaurante()}"
+                                var="restaurante"
+                                emptyMessage="Nenhum restaurante cadastrado."
+                                rowKey="#{restaurante.codigoRestaurante}"
+                                paginator="true"
+                                rows="5"
+
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+                                <p:column headerText="Restaurante">
+                                    <p:outputLabel value="#{restaurante.nomeRestaurante}" />
+                                </p:column>
+
+                                <p:column headerText="Pratos">
+                                    <p:dataList
+                                        id="cardapio"
+                                        value="#{restaurante.cardapio}"
+                                        var="prato"
+                                        emptyMessage="---"
+                                        itemType="none">
+
+                                        <!--button Adicionar prato -->
+                                        <f:facet name="header">
+                                            <div style="text-align: right;">
+                                                <p:commandButton 
+                                                    value="Adicionar "
+                                                    icon="fa fa-plus" 
+                                                    update=":form:restaurante:cardapio"
+                                                    oncomplete="PF('includeDialog').show()">                                    
+                                                    <f:setPropertyActionListener 
+                                                        value="#{restaurante}"
+                                                        target="#{restauranteBean.restauranteSelecionada}"/>
+                                                </p:commandButton>
+                                            </div>
+                                        </f:facet>
+
+                                        <!-- Excluir prato -->
+                                        <p:outputLabel value="Nome: #{prato.nome} " /> <br></br>
+                                        <p:outputLabel value="Valor: R$ #{prato.valorProduto} " />
+
+                                        <p:commandButton
+
+                                            style="float: right; width: 7em;"
+                                            value="Excluir " 
+                                            icon="fa fa-trash"
+                                            update="cardapio"
+                                            action="#{restauranteBean.excluirCardapio(pratoBean.pratoSelecionada)}">
+                                            <f:setPropertyActionListener 
+                                                value="#{restaurante}"
+                                                target="#{restauranteBean.restauranteSelecionada}"/>
+
+                                            <f:setPropertyActionListener 
+                                                value="#{prato}"
+                                                target="#{pratoBean.pratoSelecionada}"/>
+                                        </p:commandButton>
+
+
+
+
+                                        <div style="text-align: right;">
+                                            <p:commandButton value="Editar"
+                                                             icon="fa fa-fw fa-plus" 
+                                                             update="cardapio"
+                                                             oncomplete="PF('editDialog').show()">
+                                                <f:setPropertyActionListener value="#{prato}" 
+                                                                             target="#{pratoBean.pratoSelecionada}"/>
+                                            </p:commandButton>
+                                        </div>
+
+                                    </p:dataList>
+
+                                </p:column>
+
+                            </p:dataTable>
+
+                            <!-- Diálogo para edição de tarefa vinculado ao formulário -->
+                            <!-- Diálogo para edição de tarefa vinculado ao formulário -->
+                            <p:dialog header="Edição de prato"
+                                      widgetVar="editDialog"
+                                      modal="true"
+                                      showEffect="fade"
+                                      hideEffect="fade"
+                                      resizable="false">
+                                <p:outputPanel id="pratoEdit" 
+                                               style="text-align: center;">
+                                    <p:panelGrid columns="2" 
+                                                 rendered="#{not empty pratoBean.pratoSelecionada}">
+
+                                        <p:column headerText="Nome">
+                                            <h:outputLabel value="Nome" />
+                                            <h:inputText value="#{pratoBean.pratoSelecionada.nome}" />
+                                        </p:column>
+                                        <p:column headerText="Valorproduto">
+                                            <h:outputLabel value="Valorproduto: " />
+                                            <h:inputText value="#{pratoBean.pratoSelecionada.valorProduto}" />
+                                        </p:column>
+                                        <p:commandButton value="Atualizar"
+                                                         icon="fa fa-fw fa-pencil"
+                                                         action="#{pratoBean.updatePrato()}" />
+                                    </p:panelGrid>
+                                </p:outputPanel>
+                            </p:dialog>
+                            <p:dialog header="Inclusão de Prato"
+                                      widgetVar="includeDialog"
+                                      modal="true"
+                                      showEffect="fade"
+                                      hideEffect="fade"
+                                      resizable="false">
+                                <p:outputPanel id="pratoInclude"
+                                               style="text-align: center;">
+                                    <p:panelGrid columns="2">
+
+                                        <h:outputLabel value="Nome: " />
+                                        <p:inputText value="#{pratoBean.prato.nome}"  />
+
+                                        <h:outputLabel value="Valor do produto: " />
+                                        <p:inputText value="#{pratoBean.prato.valorProduto}" />
+
+
+                                        <p:commandButton icon="fa fa-save"
+                                                         value="Salvar "
+                                                         update=":form:restaurante:cardapio"
+                                                         oncomplete="PF('includeDialog').hide()"
+                                                         action="#{restauranteBean.adicionarCardapio(pratoBean.prato)}">                                                                                                               
+                                            <!-- todo 'action' deve atualizar a página ou fazer uso de ajax -->
+                                        </p:commandButton>               
+
+                                    </p:panelGrid>
+                                </p:outputPanel>
+                            </p:dialog>
+
+                        </h:form>
+                        <h:link value="Voltar" outcome="/index" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </h:body>
+</html>

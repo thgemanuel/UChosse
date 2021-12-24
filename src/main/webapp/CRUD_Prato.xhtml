@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Pagina de cadastro</title>
+    </h:head>
+    <h:body>
+        <h1>Prato</h1>
+
+        <h:form>
+            <h:panelGrid columns="4" cellpadding="4">
+                <h:outputLabel value="Nome: " />
+                <p:inputText value="#{pratoBean.prato.nome}" pt:autofocus="autofocus" />
+                <h:outputLabel value="Valor do Produto: " />
+                <p:inputText value="#{pratoBean.prato.valorProduto}" />
+                <p:commandButton value="Criar"
+                                 icon="fa fa-fw fa-plus"
+                                 action="#{pratoBean.createPrato()}" />
+            </h:panelGrid>
+        </h:form>
+
+        <!-- Listagem de dados + edição e exclusão -->
+        <h:form id="form">
+            <p:dataTable value="#{pratoBean.findAllPrato()}"
+                         var="prato"
+                         rowKey="#{prato.codigo}">
+
+                <p:column headerText="id" style="text-align: center; width: 5em;">
+                    <h:outputText value="#{prato.codigo}" />
+                </p:column>
+
+                <p:column headerText="Descrição">
+                    <h:outputText value="Nome:  #{prato.nome}"/>
+                    <br/>
+                    <h:outputText value="Valor produto: #{prato.valorProduto}" />
+                </p:column>
+
+                <p:column headerText="Edição" style="width: 7em; text-align: center;">
+                    <!-- Edição -->
+                    <p:commandButton value="Editar"
+                                     icon="fa fa-fw fa-plus" 
+                                     update=":form:pratoEdit"
+                                     oncomplete="PF('editDialog').show()">
+                        <f:setPropertyActionListener value="#{prato}" 
+                                                     target="#{pratoBean.pratoSelecionada}"/>
+                    </p:commandButton>
+
+                    <!-- Exclusão -->
+                    <p:commandButton value="Excluir"
+                                     action="#{pratoBean.deletePrato()}" 
+                                     icon="fa fa-trash">
+                        <f:setPropertyActionListener value="#{prato}" 
+                                                     target="#{pratoBean.pratoSelecionada}"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+            <!-- Diálogo para edição de tarefa vinculado ao formulário -->
+            <p:dialog header="Edição de prato"
+                      widgetVar="editDialog"
+                      modal="true"
+                      showEffect="fade"
+                      hideEffect="fade"
+                      resizable="false">
+                <p:outputPanel id="pratoEdit" 
+                               style="text-align: center;">
+                    <p:panelGrid columns="2" 
+                                 rendered="#{not empty pratoBean.pratoSelecionada}">
+
+                        <p:column headerText="Nome">
+                            <h:outputLabel value="Nome" />
+                            <h:inputText value="#{pratoBean.pratoSelecionada.nome}" />
+                        </p:column>
+                        <p:column headerText="Valorproduto">
+                            <h:outputLabel value="Valorproduto: " />
+                            <h:inputText value="#{pratoBean.pratoSelecionada.valorProduto}" />
+                        </p:column>
+                        <p:commandButton value="Atualizar"
+                                         icon="fa fa-fw fa-pencil"
+                                         action="#{pratoBean.updatePrato()}" />
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+
+
+    </h:body>
+</html>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Pagina de cadastro</title>
+    </h:head>
+    <h:body>
+        <h1>Endereco</h1>
+
+        <h:form>
+            <h:panelGrid columns="4" cellpadding="4">
+                <h:outputLabel value="CEP " />
+                <p:inputText value="#{enderecoBean.endereco.cep}" pt:autofocus="autofocus" />
+                <h:outputLabel value="Bairro " />
+                <p:inputText value="#{enderecoBean.endereco.bairro}" />
+                <h:outputLabel value="Cidade: " />
+                <p:inputText value="#{enderecoBean.endereco.cidade}" />
+                <h:outputLabel value="Estado: " />
+                <p:inputText value="#{enderecoBean.endereco.estado}" />
+                <h:outputLabel value="Rua: " />
+                <p:inputText value="#{enderecoBean.endereco.rua}" />
+                <h:outputLabel value="Complemento: " />
+                <p:inputText value="#{enderecoBean.endereco.complemento}" />
+                <h:outputLabel value="Numero: " />
+                <p:inputText value="#{enderecoBean.endereco.numero}" />
+
+                <p:commandButton value="Criar"
+                                 icon="fa fa-fw fa-plus"
+                                 action="#{enderecoBean.createEndereco()}" />
+            </h:panelGrid>
+        </h:form>
+
+        <!-- Listagem de dados + edição e exclusão -->
+        <h:form id="form">
+            <p:dataTable value="#{enderecoBean.findAllEndereco()}"
+                         var="endereco"
+                         rowKey="#{endereco.codigoEndereco}">
+
+                <p:column headerText="id" style="text-align: center; width: 5em;">
+                    <h:outputText value="#{endereco.codigoEndereco}" />
+                </p:column>
+
+                <p:column headerText="Descrição">
+                    <h:outputText value="CEP:  #{endereco.cep}"/>
+                    <br/>
+                    <h:outputText value="Bairro: #{endereco.bairro}" />
+                    <br/>
+                    <h:outputText value="Cidade: #{endereco.cidade}" /> 
+                    <br/>
+                    <h:outputText value="Estado: #{endereco.estado}"/>
+                    <br/>
+                    <h:outputText value="Rua: #{endereco.rua}" />
+                    <br/>
+                    <h:outputText value="Complemento: #{endereco.complemento}" />
+                    <br/>
+                    <h:outputText value="Numero:  #{endereco.numero}" />                                         
+                </p:column>
+
+                <p:column headerText="Edição" style="width: 7em; text-align: center;">
+                    <!-- Edição -->
+                    <p:commandButton value="Editar"
+                                     icon="fa fa-fw fa-plus" 
+                                     update=":form:enderecoEdit"
+                                     oncomplete="PF('editDialog').show()">
+                        <f:setPropertyActionListener value="#{endereco}" 
+                                                     target="#{enderecoBean.enderecoSelecionada}"/>
+                    </p:commandButton>
+
+                    <!-- Exclusão -->
+                    <p:commandButton value="Excluir"
+                                     action="#{enderecoBean.deleteEndereco()}" 
+                                     icon="fa fa-trash">
+                        <f:setPropertyActionListener value="#{endereco}" 
+                                                     target="#{enderecoBean.enderecoSelecionada}"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+            <!-- Diálogo para edição de tarefa vinculado ao formulário -->
+            <p:dialog header="Edição de endereco"
+                      widgetVar="editDialog"
+                      modal="true"
+                      showEffect="fade"
+                      hideEffect="fade"
+                      resizable="false">
+                <p:outputPanel id="enderecoEdit" 
+                               style="text-align: center;">
+                    <p:panelGrid columns="2" 
+                                 rendered="#{not empty enderecoBean.enderecoSelecionada}">
+
+                        <p:column headerText="CEP">
+                            <h:outputLabel value="CEP: " />
+                            <h:inputText value="#{enderecoBean.enderecoSelecionada.cep}" />
+                        </p:column>
+                        <p:column headerText="Bairro">
+                            <h:outputLabel value="Bairro: " />
+                            <h:inputText value="#{enderecoBean.enderecoSelecionada.bairro}" />
+                        </p:column>
+                        <p:column headerText="Cidade">
+                            <h:outputLabel value="Cidade: " />
+                            <h:inputText value="#{enderecoBean.enderecoSelecionada.cidade}" />
+                        </p:column>                                                                      
+                        <p:column headerText="Estado">
+                            <h:outputLabel value="Estado: " />
+                            <h:inputText value="#{enderecoBean.enderecoSelecionada.estado}" />
+                        </p:column>
+                        <p:column headerText="Rua">
+                            <h:outputLabel value="Rua: " />
+                            <h:inputText value="#{enderecoBean.enderecoSelecionada.rua}" />
+                        </p:column>
+                        <p:column headerText="Complemento">
+                            <h:outputLabel value="Complemento: " />
+                            <h:inputText value="#{enderecoBean.enderecoSelecionada.complemento}" />
+                        </p:column>                          
+                        <p:column headerText="Numero">
+                            <h:outputLabel value="Numero: " />
+                            <h:inputText value="#{enderecoBean.enderecoSelecionada.numero}" />
+                        </p:column>                                               
+
+                        <p:commandButton value="Atualizar"
+                                         icon="fa fa-fw fa-pencil"
+                                         action="#{enderecoBean.updateEndereco()}" />
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+
+
+    </h:body>
+</html>

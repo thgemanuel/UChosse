@@ -1,0 +1,233 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <title>Uchoose</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="css/prettyPhoto.css" rel="stylesheet"/>
+        <link href="css/price-range.css" rel="stylesheet"/>
+        <link href="css/animate.css" rel="stylesheet"/>
+        <link href="css/main.css" rel="stylesheet"/>
+        <link href="css/responsive.css" rel="stylesheet"/>
+
+        <link rel="shortcut icon" href="images/ico/favicon.ico"/>
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png"/>
+        <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"/>
+    </h:head><!--/head-->
+
+    <h:body>
+        <header id="header"><!--header-->
+
+
+            <div class="header-middle"><!--header-middle-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="logo pull-left">
+                                <a href="index.xhtml"><img src="images/home/logo.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="shop-menu pull-right">
+                                <ul class="nav navbar-nav">
+                                    <li><h:link  outcome="/gerente/index.xhtml" class="active"><i class="fa fa-user"></i> Área gerente</h:link></li>
+                                    <li><a href="CRUD_Restaurante.xhtml" class="active"><i class="fa fa-user"></i> Adicionar Restaurante</a></li>
+                                    <li><a href="newxhtml.xhtml" class="active"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                    <li><a href="login.xhtml" class="active"><i class="fa fa-lock"></i> Login</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/header-middle-->
+        </header><!--/header-->
+
+
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="left-sidebar">
+                            <h2>Category</h2>
+                            <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+                                                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                                Sportswear
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="sportswear" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ul>
+                                                <li><a href="#">Nike </a></li>
+                                                <li><a href="#">Under Armour </a></li>
+                                                <li><a href="#">Adidas </a></li>
+                                                <li><a href="#">Puma</a></li>
+                                                <li><a href="#">ASICS </a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordian" href="#mens">
+                                                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                                Mens
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="mens" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ul>
+                                                <li><a href="#">Fendi</a></li>
+                                                <li><a href="#">Guess</a></li>
+                                                <li><a href="#">Valentino</a></li>
+                                                <li><a href="#">Dior</a></li>
+                                                <li><a href="#">Versace</a></li>
+                                                <li><a href="#">Armani</a></li>
+                                                <li><a href="#">Prada</a></li>
+                                                <li><a href="#">Dolce and Gabbana</a></li>
+                                                <li><a href="#">Chanel</a></li>
+                                                <li><a href="#">Gucci</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordian" href="#womens">
+                                                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                                Womens
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="womens" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ul>
+                                                <li><a href="#">Fendi</a></li>
+                                                <li><a href="#">Guess</a></li>
+                                                <li><a href="#">Valentino</a></li>
+                                                <li><a href="#">Dior</a></li>
+                                                <li><a href="#">Versace</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="#">Kids</a></h4>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="#">Fashion</a></h4>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="#">Households</a></h4>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="#">Interiors</a></h4>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="#">Clothing</a></h4>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="#">Bags</a></h4>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="#">Shoes</a></h4>
+                                    </div>
+                                </div>
+                            </div><!--/category-products-->
+
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-sm-9 padding-right">
+                        <div class="features_items"><!--features_items-->
+                            <h2 class="title text-center">Features Items</h2>
+                            <ul>
+                                <ui:repeat value="#{restauranteBean.findAllRestaurante()}" var="restaurante">
+                                    <div class="col-sm-4">
+
+                                        <li>
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+
+                                                        <img  src="images/home/#{restaurante.codigoRestaurante}.png" alt="" />
+                                                        <p:outputLabel value="#{restaurante.nomeRestaurante}"/>
+                                                        <p>
+                                                            <p:outputLabel value="#{restaurante.descricao}"/>
+                                                        </p>
+                                                        <h:form >
+                                                            <p:commandButton id = "restaurante" value="Visitar" class="btn btn-default add-to-cart" action="#{restauranteBean.goTo}">
+                                                                <f:setPropertyActionListener target="#{restaurante.codigoRestaurante}" value="#{restaurante.codigoRestaurante}" />
+                                                                <!--<f:param name="codigoRestaurante" value="#{restaurante.codigoRestaurante}" />-->
+                                                            </p:commandButton>
+                                                        </h:form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </div>
+                                </ui:repeat>
+                            </ul>
+
+                        </div><!--features_items-->
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </h:body>
+</html>
+
+
+
+<!--<h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h1>Uchoose</h1>
+        <h:link value="LOGAR" outcome="/login" />
+        <br>
+
+        </br>
+        <h:link value="Pagina do gerente" outcome="/gerente/index" /> |
+        <h:link value="Pagina do cliente" outcome="/cliente/index" /> |
+        <h:link value="Cadastrar Restaurante" outcome="/cadastroRestaurante" /> |
+        <h:link value="Cadastrar cliente" outcome="/cadastroCliente" />
+        <br />
+
+    </h:body>-->

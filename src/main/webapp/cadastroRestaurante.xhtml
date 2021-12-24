@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <title>Uchoose</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="css/prettyPhoto.css" rel="stylesheet"/>
+        <link href="css/price-range.css" rel="stylesheet"/>
+        <link href="css/animate.css" rel="stylesheet"/>
+        <link href="css/main.css" rel="stylesheet"/>
+        <link href="css/responsive.css" rel="stylesheet"/>
+
+        <link rel="shortcut icon" href="images/ico/favicon.ico"/>
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png"/>
+        <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"/>
+    </h:head><!--/head-->
+
+    <h:body>
+        <header id="header"><!--header-->
+
+
+            <div class="header-middle"><!--header-middle-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="logo pull-left">
+                                <a href="index.xhtml"><img src="images/home/logo.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="shop-menu pull-right">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="cadastroRestaurante.xhtml" class="active"><i class="fa fa-user"></i> Gerenciar Restaurante</a></li>
+                                    <li><a href="gerenciarRestaurante.xhtml" class="active"><i class="fa fa-user"></i> Gerenciar Pratos</a></li>
+                                    <li><a href="CRUD_Restaurante.xhtml" class="active"><i class="fa fa-user"></i> Adicionar Restaurante</a></li>
+                                    <li><a href="newxhtml.xhtml" class="active"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                    <li><a href="login.xhtml" class="active"><i class="fa fa-lock"></i> Login</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/header-middle-->
+        </header><!--/header-->
+
+        <style type="text/css">
+            .ui-datatable {
+                margin-bottom: 25px
+            }
+
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+
+            .ui-button-text-only .ui-button-text {
+                padding: 0.3em 0.4em;
+            }
+
+            .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
+                visibility: hidden;
+            }
+
+            .ui-filter-column .ui-column-customfilter .custom-filter {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .year-spinner input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        </style>
+
+        <div class="container">
+            <style type="text/css"> 
+                .ui-widget-header{
+                    background: #ffffff00 ;
+                    border:  #ffffff00;
+                }
+                .ui-widget {
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 1.1em;
+                }
+                .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 1em;
+                }
+                .ui-widget {
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 1.1em;
+                }
+            </style>
+            <div class="container">
+                <div class="row">
+                    <div>
+                        <div class="login-form">
+                            <h2>Gerenciar Restaurante</h2>
+
+
+                            <!-- Listagem de dados + edição e exclusão -->
+                            <h:form id="form">
+                                <p:dataTable value="#{restauranteBean.findAllRestaurante()}"
+                                             var="restaurante"
+                                             rowKey="#{restaurante.codigoRestaurante}">
+
+                                    <p:column headerText="id" style="text-align: center; width: 5em;">
+                                        <h:outputText value="#{restaurante.codigoRestaurante}" />
+                                    </p:column>
+
+                                    <p:column headerText="Descrição">
+                                        <h:outputText value="Nome do restaurante: #{restaurante.nomeRestaurante}"/>
+                                        <br/>
+                                        <h:outputText value="Endereco do restaurante: #{restaurante.endereco}" />
+                                        <br/>
+                                        <h:outputText value="Telefone do restaurante: #{restaurante.telefone}" /> 
+                                        <br/>
+                                        <h:outputText value="Email do restaurante: #{restaurante.email}"/>
+                                        <br/>
+                                        <h:outputText value="CPF: #{restaurante.cnpj}" />
+                                        <br/>
+                                        <h:outputText value="Horario Atendimento: #{restaurante.horarioAtendimento}" />
+                                        <br/>
+                                        <h:outputText value="Taxa de entrega: #{restaurante.valorTaxaEntrega}" />                                          
+                                    </p:column>
+
+                                    <p:column headerText="Edição" style="width: 11em; text-align: center;">
+                                        <!-- Edição -->
+                                        <p:commandButton value="Editar"
+                                                         icon="fa fa-fw fa-plus" 
+                                                         update=":form:clienteEdit"
+                                                         oncomplete="PF('editDialog').show()">
+                                            <f:setPropertyActionListener value="#{restaurante}" 
+                                                                         target="#{restauranteBean.restauranteSelecionada}"/>
+                                        </p:commandButton>
+
+                                        <!-- Exclusão -->
+                                        <p:commandButton value="Excluir"
+                                                         action="#{restauranteBean.deleteRestaurante()}" 
+                                                         icon="fa fa-trash">
+                                            <f:setPropertyActionListener value="#{restaurante}" 
+                                                                         target="#{restauranteBean.restauranteSelecionada}"/>
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:dataTable>
+
+                                <!-- Diálogo para edição de restaurante vinculado ao formulário -->
+                                <p:dialog header="Edição de cliente"
+                                          widgetVar="editDialog"
+                                          modal="true"
+                                          showEffect="fade"
+                                          hideEffect="fade"
+                                          resizable="false">
+                                    <p:outputPanel id="clienteEdit" 
+                                                   style="text-align: center;">
+                                        <p:panelGrid columns="2" 
+                                                     rendered="#{not empty restauranteBean.restauranteSelecionada}">
+
+                                            <p:column headerText="Nome do restaurante">
+                                                <h:outputLabel value="Nome do restaurante: " />
+                                                <h:inputText value="#{restauranteBean.restauranteSelecionada.nomeRestaurante}" />
+                                            </p:column>
+
+                                            <p:column headerText="Telefone do restaurante">
+                                                <h:outputLabel value="Telefone do restaurante: " />
+                                                <h:inputText value="#{restauranteBean.restauranteSelecionada.telefone}" />
+                                            </p:column>                                                                      
+                                            <p:column headerText="Email do restaurante">
+                                                <h:outputLabel value="Email do restaurante: " />
+                                                <h:inputText value="#{restauranteBean.restauranteSelecionada.email}" />
+                                            </p:column>
+                                            <p:column headerText="CNPJ">
+                                                <h:outputLabel value="CNPJ: " />
+                                                <h:inputText value="#{restauranteBean.restauranteSelecionada.cnpj}" />
+                                            </p:column>
+                                            <p:column headerText="Horario atendimento">
+                                                <h:outputLabel value="Horario atendimento: " />
+                                                <h:inputText value="#{restauranteBean.restauranteSelecionada.horarioAtendimento}" />
+                                            </p:column>                          
+                                            <p:column headerText="Taxa de entrega">
+                                                <h:outputLabel value="Taxa de entrega: " />
+                                                <h:inputText value="#{restauranteBean.restauranteSelecionada.valorTaxaEntrega}" />
+                                            </p:column>                                               
+
+                                            <p:commandButton value="Atualizar"
+                                                             icon="fa fa-fw fa-pencil"
+                                                             action="#{restauranteBean.updateRestaurante()}" />
+                                        </p:panelGrid>
+                                    </p:outputPanel>
+                                </p:dialog>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>

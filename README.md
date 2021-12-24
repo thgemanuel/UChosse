@@ -10,10 +10,6 @@ Para executar o projeto é nescessario ter instalado a NetBeans IDE.
 
 Este trabalho teve o objetivo de criar uma aplicação chamada UChosse com Login e Crud de produtos com orientação a objeto.
 
-## 🛠️ Construído com
-
-* [NetBeans](https://netbeans.apache.org/download/index.html) - NetBeans
-
 ## ✒️ Autores
 
 * **Thiago Emanuel** - *Trabalho Inicial* - [thgemanuel](https://github.com/thgemanuel)
